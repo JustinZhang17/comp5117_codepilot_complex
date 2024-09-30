@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "comp5117-codepilot-complex"
+version = "0.1.0"
+description = "COMP5117 Project - Testing Codepilot against complex code snippet for code coverage evaluation"
+authors = ["Kaya Gouin <kayagouin@cmail.carleton.ca>","Justin Zhang <jing.justin@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.110.1"
+uvicorn = "^0.29.0"
+
+[tool.poetry.scripts]
+start = "src.main:start"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+# Change the venvPath and venv virtual environment path to the directory and environment where you project is located if your linter is having issues recognizing packages 
+# Find the path using the command `poetry show -v`
+venvPath = "/home/justin/.cache/pypoetry/virtualenvs/"
+venv = "comp5117-codepilot-complex-AXxfvun4-py3.12"
