@@ -9,5 +9,6 @@ int find_minimum(int i, int j){
 int main(){
     int i = 6;
     int j = 2;
-    printf("min(%d, %d) = %d\n", i, j, find_minimum(i, j));
+    printf("min(%d, %d) = %d", i, j, find_minimum(i, j));
+    fflush(stdout);
 }
