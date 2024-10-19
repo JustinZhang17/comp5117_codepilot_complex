@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Code Pilot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="px-10 lg:px-64 xl:px-96">
+    <h1 class="text-6xl mt-24 font-bold text-black text-center">CODE PILOT</h1>
+    <p class="text-sm m-2 font-bold text-black text-center">By Kaya & Justin</p>
+    <p class="text-sm mt-2 mb-8 font-bold text-black text-center">
+      COMP 5117 Project
+    </p>
+    <hr class="my-6 border" />
+    <h1 class="text-4xl font-medium text-gray-900 text-center">Settings</h1>
+    <section id="options" class="flex justify-between items-center">
+      <div class="w-full m-3">
+        <label for="model" class="block text-lg font-medium text-gray-900">
+          ML Model
+        </label>
+
+        <select
+          name="model"
+          id="model"
+          class="mt-1.5 w-full p-3 rounded-xl border-stone-400 text-stone-800 text-lg sm:text-sm"
+        >
+          <option value="">Please select</option>
+          <option value="gpt-3.5-turbo-instruct">GPT 3.5 Turbo Instruct</option>
+        </select>
+      </div>
+      <div class="w-full m-3">
+        <label for="phase" class="block text-lg font-medium text-gray-900">
+          Phase
+        </label>
+
+        <select
+          name="phase"
+          id="phase"
+          class="mt-1.5 w-full p-3 rounded-xl border-stone-400 text-stone-800 text-lg sm:text-sm"
+        >
+          <option value="">Please select</option>
+          <option value="onephase">One Phase</option>
+          <!-- <option value="twophase">Two Phase</option> -->
+        </select>
+      </div>
+    </section>
+    <hr class="my-6 border" />
+    <section
+      id="examples"
+      class="flex justify-center flex-col items-center my-6"
+    >
+      <h1 class="text-4xl font-medium text-gray-900">Examples</h1>
+      <div id="buttons" class="w-full flex justify-between items-center">
+        <button
+          id="removeExample"
+          class="w-full p-3 border-2 border-stone-400 rounded-xl hover:scale-105 transition duration-75 ease-in-out m-3 bg-stone-800 text-lg text-white"
+        >
+          Remove
+        </button>
+        <button
+          id="addExample"
+          class="w-full p-3 border-2 border-stone-400 rounded-xl hover:scale-105 transition duration-75 ease-in-out m-3 bg-stone-800 text-lg text-white"
+        >
+          Add
+        </button>
+      </div>
+      <div id="example-block-1" class="w-full border-2 p-6 rounded-lg my-3">
+        <label
+          for="example-code-1"
+          class="block text-sm font-medium text-gray-700 mt-4"
+        >
+          Example code snippet 1
+        </label>
+
+        <textarea
+          id="example-code-1"
+          class="mt-2 w-full rounded-lg border-gray-200 p-4 align-top shadow-md border-2 sm:text-sm outline-none"
+          rows="10"
+          placeholder="Enter your example code here"
+        ></textarea>
+
+        <label
+          for="example-plan-1"
+          class="block text-sm font-medium text-gray-700 mt-4"
+        >
+          Example plan 1
+        </label>
+
+        <textarea
+          id="example-plan-1"
+          class="mt-2 w-full rounded-lg border-gray-200 p-4 align-top shadow-md border-2 sm:text-sm outline-none"
+          rows="10"
+          placeholder="Enter your plan here"
+        ></textarea>
+
+        <label
+          for="example-coverage-1"
+          class="block text-sm font-medium text-gray-700 mt-4"
+        >
+          Example Code Coverage 1
+        </label>
+
+        <textarea
+          id="example-coverage-1"
+          class="mt-2 w-full rounded-lg border-gray-200 p-4 align-top shadow-md border-2 sm:text-sm outline-none"
+          rows="10"
+          placeholder="Enter your example here"
+        ></textarea>
+      </div>
+    </section>
+    <hr class="my-6 border" />
+    <section id="code" class="flex justify-between items-center">
+      <div id="code-block" class="w-full border-2 p-6 rounded-lg my-3">
+        <label
+          for="code-snippet"
+          class="block text-lg font-medium text-gray-700"
+        >
+          Code Snippet
+        </label>
+
+        <textarea
+          id="code-snippet"
+          class="mt-2 w-full rounded-lg border-gray-200 p-4 align-top shadow-md border-2 sm:text-sm outline-none"
+          rows="10"
+          placeholder="Enter your code snippet here"
+        ></textarea>
+      </div>
+    </section>
+    <section class="flex justify-center items-center flex-col mb-12">
+        <input
+          id="api-key"
+          class="m-2 w-full rounded-lg border-gray-200 px-4 py-3 align-top shadow-md border-2 sm:text-sm outline-none"
+          placeholder="Enter API key"
+        ></input>
+      <button
+        id="submit"
+        class="w-full p-3 border-2 border-stone-400 rounded-xl hover:scale-105 transition duration-75 ease-in-out m-3 bg-stone-800 text-lg text-white"
+      >
+        Submit
+      </button>
+    </section>
+    <script src="public/js/index.js"></script>
+  </body>
+</html>

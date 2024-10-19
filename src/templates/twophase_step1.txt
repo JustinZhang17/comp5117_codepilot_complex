@@ -1,0 +1,8 @@
+For a given code snippet, you are to give me the PLAN of STEP BY STEP execution of the given code snippet. 
+
+You need to develop a plan for step by step execution of the code snippet. 
+Do not answer unless instructed to do so
+{examples}
+
+In a similar fashion, develop only a PLAN of step by step execution of the below code snippet.
+{code}
