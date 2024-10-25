@@ -1,0 +1,567 @@
+---------------------------- REMOVE VOWELS (HASKELL) ----------------------------
+
+rmVowels :: [Char] -> [Char]
+rmVowels y = [ x | x <- y, x /= 'A' && x /= 'E' && x /= 'I' && x /= 'O' && x /= 'U' && x /= 'Y']
+main = do
+  let result = rmVowels ['A']
+  print result
+
+PLAN:
+STEP 1: Define a function rmVowels which takes an array of characters as input and produces an array of characters as output.
+STEP 2: In the main function, let the "result" variable hold the output of rmVowels given the array of characters ['A'].
+STEP 3: In the rmVowels function, let the output array be the input array modified such that vowel characters are removed and non-vowel characters retained.
+STEP 4: In the main function, print the resulting array to the screen.
+
+COVERAGE:
+> rmVowels :: [Char] -> [Char]
+> rmVowels y = [ x | x <- y, x /= 'A' && x /= 'E' && x /= 'I' && x /= 'O' && x /= 'U' && x /= 'Y']
+> main = do
+>   let result = rmVowels ['A']
+>   print result
+
+---------------------------- REMOVE VOWELS (HASKELL) ----------------------------
+
+
+---------------------------- REMOVE VOWELS (PROLOG) ----------------------------
+
+remove_vowels([], []).
+remove_vowels([H|T], R) :- 
+    is_vowel(H), 
+    remove_vowels(T, R).
+remove_vowels([H|T], [H|R]) :- 
+    \+ is_vowel(H), 
+    remove_vowels(T, R).
+is_vowel(Char) :- 
+    member(Char, ['A', 'E', 'I', 'O', 'U', 'Y']).
+main :-
+    Input = ['A'],
+    remove_vowels(Input, Output),
+    write(Output).
+
+PLAN:
+STEP 1: Define 4 clauses each with different parameters.
+STEP 2: Ensure a main function exists.
+STEP 3: Inside the main function, let the variable Input be the character array ['A'].
+STEP 4: The function remove_vowels(['A'], Output) is invoked.
+STEP 5: The first clause matches: remove_vowels([H|T], R) where H is A and T is [].
+STEP 6: This leads to calling the clause is_vowel(A)
+STEP 7: The is_vowel(H) predicate is called, checking if the letter A is in the list ['A', 'E', 'I', 'O', 'U', 'Y'], which it is, so the check return true
+STEP 8: Make the recursive call with the remove_vowels(T, R) clause, which T is an empty list
+STEP 9: Reach the base case remove_vowels([], []), which the predicate return R = []
+STEP 10: The control returns to the previous call remove_vowels(['A'], Output), where Output is set to and empty list []
+STEP 11: Write the Output via the write(Output) predicate, thus printing the result.
+
+COVERAGE:
+> remove_vowels([], []).
+> remove_vowels([H|T], R) :- 
+>     is_vowel(H), 
+>     remove_vowels(T, R).
+! remove_vowels([H|T], [H|R]) :- 
+!     \+ is_vowel(H), 
+!     remove_vowels(T, R).
+> is_vowel(Char) :- 
+>     member(Char, ['A', 'E', 'I', 'O', 'U', 'Y']).
+> main :-
+>     Input = ['A'],
+>     remove_vowels(Input, Output),
+>     write(Output).
+
+---------------------------- REMOVE VOWELS (PROLOG) ----------------------------
+
+
+---------------------------- REMOVE VOWELS (C) ----------------------------
+
+#include <stdio.h>
+#include <string.h>
+void removeVowels(char* str){
+	int j = 0;
+	for (int i = 0; i < strlen(str); i++){
+		if (str[i] != 'A' && str[i] != 'E' && str[i] != 'I' && str[i] != 'O' && str[i] != 'U' && str[i] != 'Y'){
+			str[j++] = str[i];
+		}
+	}
+	str[j] = '\0';
+}
+int main(){
+	char str[] = "A";
+	removeVowels(str);
+	printf("%s\n", str);
+}
+
+PLAN:
+STEP 1: Ensure a main function exists.
+STEP 2: Import stdio.h and stdlib.h.
+STEP 3: In the main function, let the variable "str" be the character array "A".
+STEP 4: In the main function, call the "removeVowels" function with "str" as input. Print "str" to the screen.
+STEP 5: Ensure a removeVowels function exists.
+STEP 6: In the removeVowels function, declare a variable "j" and initialize it to 0.
+STEP 7: For all characters of the input string, if the character under analysis is not a vowel, "str" at index "j" will hold the character's value. J is then increased by one. In this case, since the character will only ever have a value of 'A', the body of the if statement is not reached and the for loop terminates.
+STEP 9: At the end of the for loop in the remove_vowels function, append a null character to "str".
+
+COVERAGE:
+> #include <stdio.h>
+> #include <string.h>
+> void removeVowels(char* str){
+> 	int j = 0;
+> 	for (int i = 0; i < strlen(str); i++){
+> 		if (str[i] != 'A' && str[i] != 'E' && str[i] != 'I' && str[i] != 'O' && str[i] != 'U' && str[i] != 'Y'){
+! 			str[j++] = str[i];
+  		}
+  	}
+> 	str[j] = '\0';
+  }
+> int main(){
+> 	char str[] = "A";
+> 	removeVowels(str);
+> 	printf("%s\n", str);
+  }
+
+---------------------------- REMOVE VOWELS (C) ----------------------------
+
+
+---------------------------- REMOVE VOWELS (JAVA) ----------------------------
+
+public class VowelFilter{
+	private char[] arr;
+	private char[] filtered;
+	public VowelFilter(char[] arr){
+		this.arr = arr;
+	}
+	public void filter(){
+		int count = 0;
+		for(char c : this.arr){
+			if(!isVowel(c)){
+				count++;
+			}
+		}
+		this.filtered = new char[count];
+		for(char c : this.arr){
+			if(!isVowel(c)){
+				this.filtered[count - 1] = c;
+				count--;
+			}
+		}
+	}
+	public String toString(){
+		StringBuilder out = new StringBuilder("[ ");
+		for (int i = this.filtered.length - 1; i >= 0; i--){
+			out.append(this.filtered[i]).append(" ");
+		}
+		out.append("]");
+		return out.toString();
+	}
+	private boolean isVowel(char c){
+		return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'Y');
+	}
+	public static void main(String[] args){
+		VowelFilter fil = new VowelFilter(new char[]{'A', 'E', 'I', 'O', 'U'});
+		fil.filter();
+		System.out.println(fil);
+	}
+}
+
+PLAN:
+STEP 1: Ensure a main function exists.
+STEP 2: Instantiate a VowelFilter Object fil and pass in array of chars ['A', 'E', 'I', 'O', 'U'] into the VowelFilter constructor.
+STEP 3: Instantiate the object fil and set the instance variable arr to the passed in array of chars.
+STEP 4: Call the objects method filter() to filter out the vowels from the array arr.
+STEP 5: Set count to 0.
+STEP 6: Iterate through the array of chars in arr.
+STEP 7: Check if each character is a vowel using the isVowel() method.
+STEP 8: Each time the character in the arr array isn't a vowel, increment count by 1.
+STEP 9: After counting the number of non-vowel characters in the array, instantiate the filtered instance variable to an array of chars with a size of the variable count.
+STEP 10: Iterate through the array of chars in arr again.
+STEP 11: Check if each character is a vowel using the isVowel() method again.
+STEP 12: Each time the chacter in the arr array isn't a vowel, set the value in the filtered array at index count-1 to the non-vowel character, then decrement count by 1.
+STEP 13: Repeat this process until the for loop has iterated over all characters in the arr array.
+STEP 14: Return from the filter method.
+STEP 15: Print out the array of non-vowel characters to the user using the overridden toString Method.
+
+COVERAGE:
+> public class VowelFilter{
+> 	private char[] arr;
+> 	private char[] filtered;
+> 	public VowelFilter(char[] arr){
+> 		this.arr = arr;
+  	}
+> 	public void filter(){
+> 		int count = 0;
+> 		for(char c : this.arr){
+> 			if(!isVowel(c)){
+! 				count++;
+  			}
+  		}
+> 		this.filtered = new char[count];
+> 		for(char c : this.arr){
+> 			if(!isVowel(c)){
+! 				this.filtered[count - 1] = c;
+! 				count--;
+  			}
+  		}
+  	}
+> 	public String toString(){
+> 		StringBuilder out = new StringBuilder("[ ");
+> 		for (int i = this.filtered.length - 1; i >= 0; i--){
+> 			out.append(this.filtered[i]).append(" ");
+  		}
+> 		out.append("]");
+> 		return out.toString();
+  	}
+> 	private boolean isVowel(char c){
+> 		return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'Y');
+  	}
+> 	public static void main(String[] args){
+> 		VowelFilter fil = new VowelFilter(new char[]{'A', 'E', 'I', 'O', 'U'});
+> 		fil.filter();
+> 		System.out.println(fil);
+  	}
+  }
+
+---------------------------- REMOVE VOWELS (JAVA) ----------------------------
+
+
+---------------------------- REMOVE VOWELS (BASH) ----------------------------
+
+#!/bin/bash
+remove_vowels(){
+	local input="$1"
+	local output=""
+	for (( i=0; i<${#input}; i++ )); do
+		local char="${input:i:1}"
+			if [[ ! "$char" =~ [AEIOUY] ]]; then
+				output+="$char"
+			fi
+	done
+	echo "$output"
+}
+main(){
+	local str="A"
+	local modified_str=$(remove_vowels "$str")
+	echo "$modified_str"
+}
+main
+
+PLAN:
+STEP 1: Ensure a main function exists and is called.
+STEP 2: The shebang is executed and is read by the operating system.
+STEP 3: In the main function, let the variable "str" be the string "A".
+STEP 4: In the main function, let the variable "modified_str" be the result of the remove_vowels function with "str" as input. Print "modified_str" to the screen.
+STEP 5: Ensure a remove_vowels function exists.
+STEP 6: In the remove_vowels function, label input and output variables.
+STEP 7: For all characters of the input string, let "char" be the character under analysis.
+STEP 8: If "char" is not a vowel, then append "char" to the output variable. In this case, since "char" will only ever have a value of 'A', the body of the if statement is not reached, and the for loop terminates.
+STEP 9: At the end of the for loop in the remove_vowels function, print the output string to the screen.
+
+COVERAGE:
+> #!/bin/bash
+> remove_vowels(){
+> 	local input="$1"
+> 	local output=""
+> 	for (( i=0; i<${#input}; i++ )); do
+> 		local char="${input:i:1}"
+> 			if [[ ! "$char" =~ [AEIOUY] ]]; then
+! 				output+="$char"
+  			fi
+  	done
+> 	echo "$output"
+  }
+> main(){
+> 	local str="A"
+> 	local modified_str=$(remove_vowels "$str")
+> 	echo "$modified_str"
+  }
+> main
+
+---------------------------- REMOVE VOWELS (BASH) ----------------------------
+
+
+---------------------------- VALID PARENTHESES (HASKELL) ----------------------------
+
+isValidParentheses :: String -> Bool
+isValidParentheses str = check str 0
+  where
+    check [] 0 = True
+    check [] _ = False
+    check (')':xs) n = n > 0 && check xs (n - 1)
+    check ('(':xs) n = check xs (n + 1)
+    check (_:xs) n = check xs n
+main = do
+  let result = isValidParentheses "(()"
+  print result
+
+PLAN:
+STEP 1: Define a function isValidParentheses which takes a string as input and produces a boolean as output.
+STEP 2: In the main function, let the "result" variable hold the output of isValidParentheses given the string "(()".
+STEP 3: In the isValidParentheses function, initiate the conditional checks with parameters str and 0.
+STEP 4: Define five checks. Check 1 verifies whether the parameters are an empty list and the value 0. Check 2 verifies whether the parameters are an empty list and any value other than 0. Check 3 verifies whether the first character of the first parameter is a right parenthesis. Check 4 verifies whether the first character of the first parameter is a left parenthesis. Check 5 verifies whether the first character of the first parameter is any character other than a right or a left parenthesis. These checks are executed in the order in which they appear. We stop executing the next check as soon as we find one which satisfies the correct condition. In the case of the "(()" input string, given the ordering of the checks, all checks are executed.
+STEP 5: In the main function, print the resulting array to the screen.
+
+COVERAGE:
+> isValidParentheses :: String -> Bool
+> isValidParentheses str = check str 0
+>   where
+>     check [] 0 = True
+>     check [] _ = False
+>     check (')':xs) n = n > 0 && check xs (n - 1)
+>     check ('(':xs) n = check xs (n + 1)
+>     check (_:xs) n = check xs n
+> main = do
+>   let result = isValidParentheses "(()"
+>   print result
+
+---------------------------- VALID PARENTHESES (HASKELL) ----------------------------
+
+
+---------------------------- VALID PARENTHESES (PROLOG) ----------------------------
+
+valid_pair('(', ')').
+is_valid_string(L) :- validate(L, []).
+validate([], []).
+validate([H|T], Stack) :-
+    member(H, ['(']),
+    validate(T, [H|Stack]).
+validate([H|T], [Top|Rest]) :-
+    valid_pair(Top, H),
+    validate(T, Rest).
+validate(_, _) :- fail.
+main :-
+    Input = ['(', '(', ')', ')'],
+    is_valid_string(Input).
+
+PLAN:
+STEP 1: Define the valid pairs of brackets using the clause valid_pair('(', ')').
+STEP 2: Ensure a main function exists.
+STEP 3: Inside the main function, let the variable Input be the character array ['(', '(', ')', ')'].
+STEP 4: Call the function is_valid_string(Input), which triggers the validation process.
+STEP 5: Inside is_valid_string, the validate predicate is invoked with the arguments (['(', '(', ')', ')'], []), starting with an empty stack.
+STEP 6: The first element '(' is processed, matching the clause validate([H|T], Stack) where H is '(' and T is ['(', ')', ')'].
+STEP 7: Since '(' is an opening bracket, it gets pushed onto the stack, leading to a recursive call with validate(['(', ')', ')'], ['(']).
+STEP 8: The next element '(' is processed in a similar manner, leading to the call validate([')', ')'], ['(', '(']).
+STEP 9: The element ')' is now processed, which matches the clause validate([H|T], [Top|Rest]), where H is ')' and Top is '('
+STEP 10: The valid_pair('(', ')') predicate checks if '(' matches ')', which it does, so the stack now has ['('] after removing '('
+STEP 11: The next element ')' is processed, again matching the clause validate([H|T], [Top|Rest]), where H is ')' and Top is '('
+STEP 12: The valid_pair('(', ')') predicate checks if '(' matches ')', which it does, resulting in an empty stack after removing '('
+STEP 13: With the input list now fully processed, the stack is empty, triggering the base case validate([], []), which signifies that the input string is valid
+STEP 14: The success returns from is_valid_string(Input), confirming that the list of brackets is valid
+
+COVERAGE:
+> valid_pair('(', ')').
+> is_valid_string(L) :- validate(L, []).
+> validate([], []).
+> validate([H|T], Stack) :-
+>     member(H, ['(']),
+>     validate(T, [H|Stack]).
+> validate([H|T], [Top|Rest]) :-
+>     valid_pair(Top, H),
+>     validate(T, Rest).
+> validate(_, _) :- fail.
+> main :-
+>     Input = ['(', '(', ')', ')'],
+>     is_valid_string(Input).
+
+---------------------------- VALID PARENTHESES (PROLOG) ----------------------------
+
+
+---------------------------- VALID PARENTHESES (C) ----------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+int isValidParentheses(const char *str){
+	int balance = 0;
+	for (int i = 0; str[i] != '\0'; i++){
+		char ch = str[i];
+		if (ch == '('){
+			balance++;
+		} 
+		else if (ch == ')'){
+			balance--;
+			if (balance < 0){
+				return 0;
+			}
+		}
+	}
+	return balance == 0;
+}
+int main(){
+    const char *test = "))";
+    printf("%s is %s\n", test, isValidParentheses(test) ? "Valid" : "Invalid");
+}
+
+PLAN:
+STEP 1: Ensure a main function exists.
+STEP 2: Import stdio.h and stdlib.h.
+STEP 3: In the main function, let the variable "test" be the character array "))".
+STEP 4: In the main function, print "Valid" if the isValidParentheses function with "test" as input returns 1, and print "Invalid" if the isValidParentheses function with "test" as input returns 0.
+STEP 5: Ensure an isValidParentheses function exists.
+STEP 6: In the isValidParentheses function, declare a "balance" variable initialized to 0.
+STEP 7: For each character of the character array passed in as input, let "ch" denote that character.
+STEP 8: If ch is a left parenthesis, increase the "balance" variable by one. Otherwise, if ch is a right parenthesis, decrease the "balance" variable by one, and check if the "balance" variable is less than zero. If it is, return 0. In this case, we have a right parenthesis as our first character, so "balance" is decreased to -1. Since -1 is less than 0, the function returns 0.
+STEP 9: Since the for loop does not complete, we do not execute the line which returns 1 if "balance" is equal to zero, and 0 otherwise.
+
+
+COVERAGE:
+> #include <stdio.h>
+> #include <stdlib.h>
+> int isValidParentheses(const char *str){
+>		int balance = 0;
+> 	for (int i = 0; str[i] != '\0'; i++){
+> 		char ch = str[i];
+> 		if (ch == '('){
+! 			balance++;
+  		} 
+> 		else if (ch == ')'){
+> 			balance--;
+> 			if (balance < 0){
+> 				return 0;
+  			}
+  		}
+  	}
+! 	return balance == 0;
+  }
+> int main(){
+>     const char *test = "))";
+>     printf("%s is %s\n", test, isValidParentheses(test) ? "Valid" : "Invalid");
+  }
+
+---------------------------- VALID PARENTHESES (C) ----------------------------
+
+
+---------------------------- VALID PARENTHESES (JAVA) ----------------------------
+
+import java.util.Stack;
+public class VPar{
+	private String s;
+	public VPar (String s){
+		this.s = s;
+	}
+	public boolean isValid(){
+		Stack<Character> stack = new Stack<Character>();
+		for (char c : s.toCharArray()){
+			if (c == '('){ 
+				stack.push(')');
+			}
+			else if (stack.isEmpty() || stack.pop() != c){ 
+				return false;
+			}
+		}
+		return stack.isEmpty();
+	}
+	public static void main(String[] args){
+		VPar p = new VPar("(())");
+		System.out.println(p.isValid());
+	}
+}
+
+PLAN:
+STEP 1: Ensure a main function exists.
+STEP 2: Import java.util.Stack.
+STEP 3: Instantiate a VPar Object p and pass in a string "(())" into the VPar constructor.
+STEP 4: Instantiate the object p and set the instance variable s to the input string.
+STEP 5: Call the objects method isValid() to check if the passed in set of parenthesis is valid with open and closing brackets.
+STEP 6: Instantitate a stack data structure called stack parameterized for Character objects.
+STEP 7: Iterate over all the characters in the string s.
+STEP 8: For every opening bracket, push its corresponding closing bracket onto the stack.
+STEP 9: For every closing bracket, pop the top element from the stack and check that the current iteration character c matches the popped character from the stack.
+STEP 10: Return false if the character doesn't match or if the stack is empty.
+STEP 11: After iterating through all the character elements, return true if the stack is empty in the end, and false if it contains 1 or more character elements.
+STEP 12: Print this return of true or false from the isValid method.
+
+COVERAGE:
+> import java.util.Stack;
+> public class VPar{
+> 	private String s;
+> 	public VPar (String s){
+> 		this.s = s;
+  	}
+> 	public boolean isValid(){
+> 		Stack<Character> stack = new Stack<Character>();
+> 		for (char c : s.toCharArray()){
+> 			if (c == '('){ 
+> 				stack.push(')');
+  			}
+> 			else if (stack.isEmpty() || stack.pop() != c){ 
+! 				return false;
+  			}
+  		}
+> 		return stack.isEmpty();
+  	}
+> 	public static void main(String[] args){
+> 		VPar p = new VPar("(())");
+> 		System.out.println(p.isValid());
+  	}
+  }
+
+---------------------------- VALID PARENTHESES (JAVA) ----------------------------
+
+
+---------------------------- VALID PARENTHESES (BASH) ----------------------------
+
+#!/bin/bash
+isValidParentheses(){
+	local str="$1"
+	local balance=0
+	for (( i=0; i<${#str}; i++ )); do
+		local ch="${str:i:1}"
+		if [[ "$ch" == "(" ]]; then
+			((balance++))
+		elif [[ "$ch" == ")" ]]; then
+			((balance--))
+			if (( balance < 0 )); then
+				echo "Invalid"
+				return
+			fi
+		fi
+	done
+	if (( balance == 0 )); then
+		echo "Valid"
+	else
+		echo "Invalid"
+	fi
+}
+main(){
+	local test="))"
+	echo "$test is $(isValidParentheses "$test")"
+}
+main
+
+PLAN:
+STEP 1: Ensure a main function exists and is called.
+STEP 2: The shebang is executed and is read by the operating system.
+STEP 3: In the main function, let the variable "test" be the character array "))".
+STEP 4: In the main function, print the result of the isValidParentheses function.
+STEP 5: Ensure an isValidParentheses function exists.
+STEP 6: In the isValidParentheses function, declare a "balance" variable initialized to 0.
+STEP 7: For each character of the character array passed in as input, let "ch" denote that character.
+STEP 8: If ch is a left parenthesis, increase the "balance" variable by one. Otherwise, if ch is a right parenthesis, decrease the "balance" variable by one, and check if the "balance" variable is less than zero. If it is, print "Invalid" to the screen and return. In this case, we have a right parenthesis as our first character, so "balance" is decreased to -1. Since -1 is less than 0, the function prints "Invalid" to the screen and returns.
+STEP 9: Since the for loop does not complete, the lines below the return statement from step 9 are not executed.
+
+COVERAGE:
+> #!/bin/bash
+> isValidParentheses(){
+> 	local str="$1"
+> 	local balance=0
+> 	for (( i=0; i<${#str}; i++ )); do
+> 		local ch="${str:i:1}"
+> 		if [[ "$ch" == "(" ]]; then
+! 			((balance++))
+> 		elif [[ "$ch" == ")" ]]; then
+> 			((balance--))
+> 			if (( balance < 0 )); then
+> 				echo "Invalid"
+> 				return
+  			fi
+  		fi
+  	done
+! 	if (( balance == 0 )); then
+! 		echo "Valid"
+! 	else
+! 		echo "Invalid"
+  	fi
+  }
+> main(){
+> 	local test="))"
+> 	echo "$test is $(isValidParentheses "$test")"
+  }
+> main
+
+---------------------------- VALID PARENTHESES (BASH) ----------------------------

@@ -1,0 +1,258 @@
+FIND DIVISORS: Find and list every divisor of the positive integer specified, in descending order
+
+
+---------------------------- FIND DIVISORS (HASKELL) ----------------------------
+
+findDivisorsRecursive :: Integer -> Integer -> [Integer]
+findDivisorsRecursive i j
+    | i == j = 1 : []
+    | (mod i j) == 0 = (div i j) : findDivisorsRecursive i (j+1)
+    | otherwise = findDivisorsRecursive i (j+1)
+
+findDivisors :: Integer -> [Integer]
+findDivisors i = findDivisorsRecursive i 1
+main = do
+  let result = findDivisors 12
+  print result
+
+---------------------------- FIND DIVISORS (HASKELL) ----------------------------
+
+
+---------------------------- FIND DIVISORS (PROLOG) ----------------------------
+
+factors(N, R) :- findall(F, factor(N, F), L), reverse(L, R).
+factor(0, _) :- !, fail.
+factor(N, F) :- between(1, N, F), 0 is N mod F.
+main :- 
+    factors(24, Output),
+    write(Output).
+
+---------------------------- FIND DIVISORS (PROLOG) ----------------------------
+
+
+---------------------------- FIND DIVISORS (C) ----------------------------
+
+#include<stdlib.h>
+#include<stdio.h>
+void findDivisorsHelper(int number, int divisor, int** divisors, int* count){
+	if (divisor > number){
+		return;
+	}
+	if (number % divisor == 0){
+		(*divisors)[*count] = divisor;
+		(*count)++;
+	}
+	findDivisorsHelper(number, divisor + 1, divisors, count);
+}
+int* findDivisors(int number, int* count){
+	int* divisors = malloc(number * sizeof(int));
+	*count = 0;
+	findDivisorsHelper(number, 1, &divisors, count);
+	for (int i = 0; i < *count/2; i++){
+		int temp = divisors[i];
+		divisors[i] = divisors[*count - i - 1];
+		divisors[*count - i - 1] = temp;
+	}
+	return divisors;
+}
+int main(int argc, char** argv){
+	int number = 12;
+	int count;
+	int* divisors = findDivisors(number, &count);
+	printf("Divisors of %d in descending order: ", number);
+	for (int i = 0; i < count; i++) {
+		printf("%d ", divisors[i]);
+	}
+	printf("\n");
+	free(divisors);
+}
+
+---------------------------- FIND DIVISORS (C) ----------------------------
+
+
+---------------------------- FIND DIVISORS (JAVA) ----------------------------
+
+import java.util.Arrays;
+public class Factors{
+	private int num;
+	private int numFact;
+	public Factors(int num){
+		this.num = num;
+		this.numFact = numFactors();
+	}
+	private int numFactors(){
+		int count = 0;
+		for(int i = this.num; i > 0; --i){
+			if(this.num % i == 0){
+				count++;
+			}
+		}
+		return count;
+	}
+	public int[] getFactors(){
+		int ind = 0;
+		int[] fac = new int[this.numFact];  
+		for(int i = this.num; i > 0; --i){
+			if(this.num % i == 0){
+				fac[ind++] = i;
+			}
+		}
+		return fac;
+	}
+	public static void main(String[] args){
+		Factors f = new Factors(24);
+		int[] factors = f.getFactors();
+		System.out.println(Arrays.toString(factors));
+	}
+}
+
+---------------------------- FIND DIVISORS (JAVA) ----------------------------
+
+
+---------------------------- FIND DIVISORS (BASH) ----------------------------
+
+#!/bin/bash
+find_divisors(){
+	local number=$1
+	local divisor=$2
+	local -n divisors=$3
+	if ((divisor > number)); then
+	return
+	fi
+	if (( number % divisor == 0 )); then
+	divisors+=("$divisor")
+	fi
+	find_divisors "$number" $((divisor + 1)) divisors
+}
+main(){
+	local number=12
+	divisors=()
+	find_divisors "$number" 1 divisors
+	echo "Divisors of $number in descending order: "
+	for ((i=${#divisors[@]}-1; i>=0; i--)); do
+		echo "${divisors[i]}"
+	done
+}
+main
+
+---------------------------- FIND DIVISORS (BASH) ----------------------------
+
+
+BUY AND SELL STOCK: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+
+---------------------------- BUY AND SELL STOCK (HASKELL) ----------------------------
+
+maxProfit :: [Int] -> Int
+maxProfit prices = maxProfitHelper prices (maxBound :: Int) 0
+  where
+    maxProfitHelper [] _ maxProfit = maxProfit
+    maxProfitHelper (p:ps) minPrice maxProfit =
+      let newMinPrice = min minPrice p
+          profit = p - newMinPrice
+          newMaxProfit = max maxProfit profit
+      in maxProfitHelper ps newMinPrice newMaxProfit
+main = do
+    let prices = [7, 1, 5, 3, 6, 4]
+    let result = maxProfit prices
+    putStrLn $ "Maximum profit: " ++ show result
+
+---------------------------- BUY AND SELL STOCK (HASKELL) ----------------------------
+
+
+---------------------------- BUY AND SELL STOCK (PROLOG) ----------------------------
+
+max_profit(Prices, MaxProfit) :-
+    max_profit_helper(Prices, 1000000, 0, MaxProfit).
+max_profit_helper([], _, MaxProfit, MaxProfit).
+max_profit_helper([Price|Rest], MinPrice, TempMaxProfit, MaxProfit) :-
+    (Price < MinPrice -> NewMinPrice = Price ; NewMinPrice = MinPrice),
+    Diff is Price - MinPrice,
+    (Diff > TempMaxProfit -> NewTempMaxProfit = Diff ; NewTempMaxProfit = TempMaxProfit),
+    max_profit_helper(Rest, NewMinPrice, NewTempMaxProfit, MaxProfit).
+main :-
+    Input = [4, 7, 2, 1, 9],
+    max_profit(Input, MaxProfit),
+    write(MaxProfit).
+
+---------------------------- BUY AND SELL STOCK (PROLOG) ----------------------------
+
+
+---------------------------- BUY AND SELL STOCK (C) ----------------------------
+
+#include<stdlib.h>
+#include <stdio.h>
+#include <limits.h>
+int maxProfit(int* prices, int pricesSize){
+	int min_price = INT_MAX;
+	int max_profit = 0;
+	for (int i = 0; i < pricesSize; i++){
+		if (prices[i] < min_price){
+			min_price = prices[i];
+		}
+		int profit = prices[i] - min_price;
+		if (profit > max_profit){
+			max_profit = profit;
+		}
+	}
+	return max_profit;
+}
+int main(){
+	int prices[] = {7, 1, 5, 3, 6, 4};
+	int size = sizeof(prices) / sizeof(prices[0]);
+	int result = maxProfit(prices, size);
+	printf("Maximum profit: %d\n", result);
+}
+
+---------------------------- BUY AND SELL STOCK (C) ----------------------------
+
+
+---------------------------- BUY AND SELL STOCK (JAVA) ----------------------------
+
+public class ProfitCalculator{
+	public int maxProfit(int[] prices){
+		int buyPrice = prices[0];
+		int profit = 0;
+		for (int i = 1; i < prices.length; i++){
+			if (buyPrice > prices[i]){
+				buyPrice = prices[i];
+			}
+			profit = Math.max(profit, prices[i] - buyPrice);
+		}
+		return profit;        
+	}
+	public static void main(String[] args){
+		ProfitCalculator pc = new ProfitCalculator();
+		int[] p = new int[]{1,2,3,1,9,1};
+		System.out.println(pc.maxProfit(p));
+	}
+}
+
+---------------------------- BUY AND SELL STOCK (JAVA) ----------------------------
+
+
+---------------------------- BUY AND SELL STOCK (BASH) ----------------------------
+
+#!/bin/bash
+maxProfit(){
+	local prices=("$@")
+	local min_price=999999999
+	local max_profit=0
+	for price in "${prices[@]}"; do
+		if (( price < min_price )); then
+			min_price=$price
+		fi
+		local profit=$(( price - min_price ))
+		if (( profit > max_profit )); then
+			max_profit=$profit
+		fi
+	done
+	echo $max_profit
+}
+main(){
+	prices=(7 1 5 3 6 4)
+	result=$(maxProfit "${prices[@]}")
+	echo "Maximum profit: $result"
+}
+main
+
+---------------------------- BUY AND SELL STOCK (BASH) ----------------------------
