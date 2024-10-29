@@ -1,0 +1,23 @@
+For the given code snippet and plan, give the code coverage that follows the plan. The code coverage indicates whether a statement has been executed or not. 
+> if the line is executed
+! if the line is not executed
+
+Example output:
+> line1
+! line2
+> line3
+...
+> linen
+
+You need to give the code with its coverage for the given plan.
+{examples}
+
+
+In a similar fashion, Give the code coverage of the below code snippet. 
+
+CODE SNIPPET:
+{code}
+
+PLAN:
+{plan}
+

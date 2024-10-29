@@ -1,0 +1,17 @@
+For the given code snippet, predict the code coverage. The code coverage indicates whether a statement has been executed or not. 
+> if the line is executed
+! if the line is not executed
+
+Example output:
+> line1
+! line2
+> line3
+...
+> linen
+
+You need to develop a plan for step by step execution of the code snippet. 
+Do not answer unless instructed to do so
+{examples}
+
+In a similar fashion, develop a PLAN of step by step execution of the below code snippet and predict the CODE COVERAGE.
+{code}
