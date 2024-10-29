@@ -1,0 +1,236 @@
+Input:
+
+For the given code snippet, predict the code coverage. The code coverage indicates whether a statement has been executed or not. 
+> if the line is executed
+! if the line is not executed
+
+Example output:
+> line1
+! line2
+> line3
+...
+> linen
+
+You need to develop a plan for step by step execution of the code snippet. 
+Do not answer unless instructed to do so
+
+DISCLAIMER: Lines that are not executed are to be denoted with a SINGLE '!' whereas lines that are executed are to be denoted with a single '>'
+Below are a couple examples of the process you need to follow to predict the code coverage of a given code snippet and its plan.
+
+Example 1
+
+Given CODE SNIPPET: 
+#include <stdio.h>
+#include <string.h>
+void removeVowels(char* str){
+	int j = 0;
+	for (int i = 0; i < strlen(str); i++){
+		if (str[i] != 'A' && str[i] != 'E' && str[i] != 'I' && str[i] != 'O' && str[i] != 'U' && str[i] != 'Y'){
+			str[j++] = str[i];
+		}
+	}
+	str[j] = '\0';
+}
+int main(){
+	char str[] = "A";
+	removeVowels(str);
+	printf("%s\n", str);
+}
+
+
+Given PLAN: 
+STEP 1: Ensure a main function exists.
+STEP 2: Import stdio.h and stdlib.h.
+STEP 3: In the main function, let the variable "str" be the character array "A".
+STEP 4: In the main function, call the "removeVowels" function with "str" as input. Print "str" to the screen.
+STEP 5: Ensure a removeVowels function exists.
+STEP 6: In the removeVowels function, declare a variable "j" and initialize it to 0.
+STEP 7: For all characters of the input string, if the character under analysis is not a vowel, "str" at index "j" will hold the character's value. J is then increased by one. In this case, since the character will only ever have a value of 'A', the body of the if statement is not reached and the for loop terminates.
+STEP 9: At the end of the for loop in the remove_vowels function, append a null character to "str".
+
+So the CODE COVERAGE for the given code snippet will be: 
+> #include <stdio.h>
+> #include <string.h>
+> void removeVowels(char* str){
+> 	int j = 0;
+> 	for (int i = 0; i < strlen(str); i++){
+> 		if (str[i] != 'A' && str[i] != 'E' && str[i] != 'I' && str[i] != 'O' && str[i] != 'U' && str[i] != 'Y'){
+! 			str[j++] = str[i];
+  		}
+  	}
+> 	str[j] = '\0';
+  }
+> int main(){
+> 	char str[] = "A";
+> 	removeVowels(str);
+> 	printf("%s\n", str);
+  }
+
+Example 2
+
+Given CODE SNIPPET: 
+#include <stdio.h>
+#include <stdlib.h>
+int isValidParentheses(const char *str){
+	int balance = 0;
+	for (int i = 0; str[i] != '\0'; i++){
+		char ch = str[i];
+		if (ch == '('){
+			balance++;
+		} 
+		else if (ch == ')'){
+			balance--;
+			if (balance < 0){
+				return 0;
+			}
+		}
+	}
+	return balance == 0;
+}
+int main(){
+    const char *test = "))";
+    printf("%s is %s\n", test, isValidParentheses(test) ? "Valid" : "Invalid");
+}
+
+
+Given PLAN: 
+STEP 1: Ensure a main function exists.
+STEP 2: Import stdio.h and stdlib.h.
+STEP 3: In the main function, let the variable "test" be the character array "))".
+STEP 4: In the main function, print "Valid" if the isValidParentheses function with "test" as input returns 1, and print "Invalid" if the isValidParentheses function with "test" as input returns 0.
+STEP 5: Ensure an isValidParentheses function exists.
+STEP 6: In the isValidParentheses function, declare a "balance" variable initialized to 0.
+STEP 7: For each character of the character array passed in as input, let "ch" denote that character.
+STEP 8: If ch is a left parenthesis, increase the "balance" variable by one. Otherwise, if ch is a right parenthesis, decrease the "balance" variable by one, and check if the "balance" variable is less than zero. If it is, return 0. In this case, we have a right parenthesis as our first character, so "balance" is decreased to -1. Since -1 is less than 0, the function returns 0.
+STEP 9: Since the for loop does not complete, we do not execute the line which returns 1 if "balance" is equal to zero, and 0 otherwise.
+
+So the CODE COVERAGE for the given code snippet will be: 
+> #include <stdio.h>
+> #include <stdlib.h>
+> int isValidParentheses(const char *str){
+>		int balance = 0;
+> 	for (int i = 0; str[i] != '\0'; i++){
+> 		char ch = str[i];
+> 		if (ch == '('){
+! 			balance++;
+  		} 
+> 		else if (ch == ')'){
+> 			balance--;
+> 			if (balance < 0){
+> 				return 0;
+  			}
+  		}
+  	}
+! 	return balance == 0;
+  }
+> int main(){
+>     const char *test = "))";
+>     printf("%s is %s\n", test, isValidParentheses(test) ? "Valid" : "Invalid");
+  }
+
+
+
+In a similar fashion, develop a PLAN of step by step execution of the below code snippet and predict the CODE COVERAGE.
+#include<stdlib.h>
+#include<stdio.h>
+void findDivisorsHelper(int number, int divisor, int** divisors, int* count){
+	if (divisor > number){
+		return;
+	}
+	if (number % divisor == 0){
+		(*divisors)[*count] = divisor;
+		(*count)++;
+	}
+	findDivisorsHelper(number, divisor + 1, divisors, count);
+}
+int* findDivisors(int number, int* count){
+	int* divisors = malloc(number * sizeof(int));
+	*count = 0;
+	findDivisorsHelper(number, 1, &divisors, count);
+	for (int i = 0; i < *count/2; i++){
+		int temp = divisors[i];
+		divisors[i] = divisors[*count - i - 1];
+		divisors[*count - i - 1] = temp;
+	}
+	return divisors;
+}
+int main(int argc, char** argv){
+	int number = 12;
+	int count;
+	int* divisors = findDivisors(number, &count);
+	printf("Divisors of %d in descending order: ", number);
+	for (int i = 0; i < count; i++) {
+		printf("%d ", divisors[i]);
+	}
+	printf("\n");
+	free(divisors);
+}
+
+
+Output:
+
+
+Given PLAN:
+STEP 1: Ensure a main function exists.
+STEP 2: Import stdlib.h and stdio.h.
+STEP 3: In the main function, let the variable "number" be 12.
+STEP 4: In the main function, declare a "count" variable.
+STEP 5: In the main function, call the findDivisors function with "number" and "&count" as inputs. Let the return value be "divisors".
+STEP 6: In the main function, print "Divisors of 12 in descending order: ".
+STEP 7: In the main function, for each value in "divisors", print that value.
+STEP 8: In the main function, free the memory allocated for "divisors".
+STEP 9: Ensure a findDivisors function exists.
+STEP 10: In the findDivisors function, allocate memory for "divisors" using malloc.
+STEP 11: In the findDivisors function, set "count" to 0.
+STEP 12: In the findDivisors function, call the findDivisorsHelper function with "number", 1, "&divisors", and "&count" as inputs.
+STEP 13: In the findDivisors function, for each value in "divisors" up to "count"/2, swap the value at index "i" with the value at index "*count - i - 1".
+STEP 14: In the findDivisors function, return "divisors".
+STEP 15: Ensure a findDivisorsHelper function exists.
+STEP 16: In the findDivisorsHelper function, if "divisor" is greater than "number", return.
+STEP 17: In the findDivisorsHelper function, if "number" is divisible by "divisor", set the value at index "*count" in "*divisors" to "divisor" and increment "*count".
+STEP 18: In the findDivisorsHelper function, call the findDivisorsHelper function with "number", "divisor + 1", "&divisors", and "&count" as inputs.
+STEP 19: In the findDivisorsHelper function, return.
+STEP 20: Ensure a main function exists.
+STEP 21: Import stdlib.h and stdio.h.
+STEP 22: In the main function, let the variable "number" be 12.
+STEP 23: In the main function, declare a "count" variable.
+STEP 24: In the main function, call the findDivisors function with "number" and "&count" as inputs. Let the return value be "divisors".
+STEP 25: In the main function, print "Divisors of 12 in descending order: ".
+STEP 26: In the main function, for each value in "divisors", print that value.
+STEP 27: In the main function, free the memory allocated for "divisors".
+
+So the CODE COVERAGE for the given code snippet will be:
+> #include<stdlib.h>
+> #include<stdio.h>
+> void findDivisorsHelper(int number, int divisor, int** divisors, int* count){
+> 	if (divisor > number){
+! 		return;
+  	}
+> 	if (number % divisor == 0){
+> 		(*divisors)[*count] = divisor;
+> 		(*count)++;
+  	}
+> 	findDivisorsHelper(number, divisor + 1, divisors, count);
+  }
+> int* findDivisors(int number, int* count){
+> 	int* divisors = malloc(number * sizeof(int));
+> 	*count = 0;
+> 	findDivisorsHelper(number, 1, &divisors, count);
+> 	for (int i = 0; i < *count/2; i++){
+> 		int temp = divisors[i];
+> 		divisors[i] = divisors[*count - i - 1];
+> 		divisors[*count - i - 1] = temp;
+  	}
+> 	return divisors;
+  }
+> int main(int argc, char** argv){
+> 	int number = 12;
+> 	int count;
+> 	int* divisors = findDivisors(number, &count);
+> 	printf("Divisors of %d in descending order: ", number);
+> 	for (int i = 0; i < count; i++) {
+> 		printf("%d ", divisors[i]);
+  	}
+> 	printf("\n");
+> 	free(divisors);
+  }

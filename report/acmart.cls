@@ -2917,7 +2917,7 @@
        \ifx\@acmEditors\@empty\textit{.}\else
          \andify\@acmEditors\textit{, }\@acmEditors~\@editorsAbbrev.%
        \fi\
-       ACM, New York, NY, USA%
+       ACM, Ottawa, ON, Canada%
          \@article@string\unskip, \ref{TotPages}~\@pages@word.
     \fi
   \fi

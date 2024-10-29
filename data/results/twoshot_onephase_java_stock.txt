@@ -1,0 +1,246 @@
+Input:
+
+For the given code snippet, predict the code coverage. The code coverage indicates whether a statement has been executed or not. 
+> if the line is executed
+! if the line is not executed
+
+Example output:
+> line1
+! line2
+> line3
+...
+> linen
+
+You need to develop a plan for step by step execution of the code snippet. 
+Do not answer unless instructed to do so
+
+DISCLAIMER: Lines that are not executed are to be denoted with a SINGLE '!' whereas lines that are executed are to be denoted with a single '>'
+Below are a couple examples of the process you need to follow to predict the code coverage of a given code snippet and its plan.
+
+Example 1
+
+Given CODE SNIPPET: 
+public class VowelFilter{
+	private char[] arr;
+	private char[] filtered;
+	public VowelFilter(char[] arr){
+		this.arr = arr;
+	}
+	public void filter(){
+		int count = 0;
+		for(char c : this.arr){
+			if(!isVowel(c)){
+				count++;
+			}
+		}
+		this.filtered = new char[count];
+		for(char c : this.arr){
+			if(!isVowel(c)){
+				this.filtered[count - 1] = c;
+				count--;
+			}
+		}
+	}
+	public String toString(){
+		StringBuilder out = new StringBuilder("[ ");
+		for (int i = this.filtered.length - 1; i >= 0; i--){
+			out.append(this.filtered[i]).append(" ");
+		}
+		out.append("]");
+		return out.toString();
+	}
+	private boolean isVowel(char c){
+		return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'Y');
+	}
+	public static void main(String[] args){
+		VowelFilter fil = new VowelFilter(new char[]{'A', 'E', 'I', 'O', 'U'});
+		fil.filter();
+		System.out.println(fil);
+	}
+}
+
+
+Given PLAN: 
+STEP 1: Ensure a main function exists.
+STEP 2: Instantiate a VowelFilter Object fil and pass in array of chars ['A', 'E', 'I', 'O', 'U'] into the VowelFilter constructor.
+STEP 3: Instantiate the object fil and set the instance variable arr to the passed in array of chars.
+STEP 4: Call the objects method filter() to filter out the vowels from the array arr.
+STEP 5: Set count to 0.
+STEP 6: Iterate through the array of chars in arr.
+STEP 7: Check if each character is a vowel using the isVowel() method.
+STEP 8: Each time the character in the arr array isn't a vowel, increment count by 1.
+STEP 9: After counting the number of non-vowel characters in the array, instantiate the filtered instance variable to an array of chars with a size of the variable count.
+STEP 10: Iterate through the array of chars in arr again.
+STEP 11: Check if each character is a vowel using the isVowel() method again.
+STEP 12: Each time the chacter in the arr array isn't a vowel, set the value in the filtered array at index count-1 to the non-vowel character, then decrement count by 1.
+STEP 13: Repeat this process until the for loop has iterated over all characters in the arr array.
+STEP 14: Return from the filter method.
+STEP 15: Print out the array of non-vowel characters to the user using the overridden toString Method.
+
+So the CODE COVERAGE for the given code snippet will be: 
+> public class VowelFilter{
+> 	private char[] arr;
+> 	private char[] filtered;
+> 	public VowelFilter(char[] arr){
+> 		this.arr = arr;
+  	}
+> 	public void filter(){
+> 		int count = 0;
+> 		for(char c : this.arr){
+> 			if(!isVowel(c)){
+! 				count++;
+  			}
+  		}
+> 		this.filtered = new char[count];
+> 		for(char c : this.arr){
+> 			if(!isVowel(c)){
+! 				this.filtered[count - 1] = c;
+! 				count--;
+  			}
+  		}
+  	}
+> 	public String toString(){
+> 		StringBuilder out = new StringBuilder("[ ");
+> 		for (int i = this.filtered.length - 1; i >= 0; i--){
+> 			out.append(this.filtered[i]).append(" ");
+  		}
+> 		out.append("]");
+> 		return out.toString();
+  	}
+> 	private boolean isVowel(char c){
+> 		return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'Y');
+  	}
+> 	public static void main(String[] args){
+> 		VowelFilter fil = new VowelFilter(new char[]{'A', 'E', 'I', 'O', 'U'});
+> 		fil.filter();
+> 		System.out.println(fil);
+  	}
+  }
+
+
+Example 2
+
+Given CODE SNIPPET: 
+import java.util.Stack;
+public class VPar{
+	private String s;
+	public VPar (String s){
+		this.s = s;
+	}
+	public boolean isValid(){
+		Stack<Character> stack = new Stack<Character>();
+		for (char c : s.toCharArray()){
+			if (c == '('){ 
+				stack.push(')');
+			}
+			else if (stack.isEmpty() || stack.pop() != c){ 
+				return false;
+			}
+		}
+		return stack.isEmpty();
+	}
+	public static void main(String[] args){
+		VPar p = new VPar("(())");
+		System.out.println(p.isValid());
+	}
+}
+
+Given PLAN: 
+STEP 1: Ensure a main function exists.
+STEP 2: Import java.util.Stack.
+STEP 3: Instantiate a VPar Object p and pass in a string "(())" into the VPar constructor.
+STEP 4: Instantiate the object p and set the instance variable s to the input string.
+STEP 5: Call the objects method isValid() to check if the passed in set of parenthesis is valid with open and closing brackets.
+STEP 6: Instantitate a stack data structure called stack parameterized for Character objects.
+STEP 7: Iterate over all the characters in the string s.
+STEP 8: For every opening bracket, push its corresponding closing bracket onto the stack.
+STEP 9: For every closing bracket, pop the top element from the stack and check that the current iteration character c matches the popped character from the stack.
+STEP 10: Return false if the character doesn't match or if the stack is empty.
+STEP 11: After iterating through all the character elements, return true if the stack is empty in the end, and false if it contains 1 or more character elements.
+STEP 12: Print this return of true or false from the isValid method.
+
+
+So the CODE COVERAGE for the given code snippet will be: 
+> import java.util.Stack;
+> public class VPar{
+> 	private String s;
+> 	public VPar (String s){
+> 		this.s = s;
+  	}
+> 	public boolean isValid(){
+> 		Stack<Character> stack = new Stack<Character>();
+> 		for (char c : s.toCharArray()){
+> 			if (c == '('){ 
+> 				stack.push(')');
+  			}
+> 			else if (stack.isEmpty() || stack.pop() != c){ 
+! 				return false;
+  			}
+  		}
+> 		return stack.isEmpty();
+  	}
+> 	public static void main(String[] args){
+> 		VPar p = new VPar("(())");
+> 		System.out.println(p.isValid());
+  	}
+  }
+
+
+In a similar fashion, develop a PLAN of step by step execution of the below code snippet and predict the CODE COVERAGE.
+public class ProfitCalculator{
+	public int maxProfit(int[] prices){
+		int buyPrice = prices[0];
+		int profit = 0;
+		for (int i = 1; i < prices.length; i++){
+			if (buyPrice > prices[i]){
+				buyPrice = prices[i];
+			}
+			profit = Math.max(profit, prices[i] - buyPrice);
+		}
+		return profit;        
+	}
+	public static void main(String[] args){
+		ProfitCalculator pc = new ProfitCalculator();
+		int[] p = new int[]{1,2,3,1,9,1};
+		System.out.println(pc.maxProfit(p));
+	}
+}
+
+
+Output:
+
+
+Given PLAN: 
+STEP 1: Ensure a main function exists.
+STEP 2: Instantiate a ProfitCalculator Object pc.
+STEP 3: Instantiate an array of integers p with values [1,2,3,1,9,1].
+STEP 4: Call the maxProfit method on the pc object and pass in the array of integers p.
+STEP 5: Set buyPrice to the first element in the array of integers p.
+STEP 6: Set profit to 0.
+STEP 7: Iterate through the array of integers p starting at index 1.
+STEP 8: Check if the current element in the array of integers p is less than the buyPrice.
+STEP 9: If it is, set the buyPrice to the current element in the array of integers p.
+STEP 10: Calculate the profit by taking the maximum of the current profit and the difference between the current element in the array of integers p and the buyPrice.
+STEP 11: Repeat this process until the for loop has iterated over all elements in the array of integers p.
+STEP 12: Return the calculated profit.
+STEP 13: Print the returned profit to the user.
+
+So the CODE COVERAGE for the given code snippet will be: 
+> public class ProfitCalculator{
+> 	public int maxProfit(int[] prices){
+> 		int buyPrice = prices[0];
+> 		int profit = 0;
+> 		for (int i = 1; i < prices.length; i++){
+> 			if (buyPrice > prices[i]){
+> 				buyPrice = prices[i];
+  			}
+! 			profit = Math.max(profit, prices[i] - buyPrice);
+  		}
+> 		return profit;        
+  	}
+> 	public static void main(String[] args){
+> 		ProfitCalculator pc = new ProfitCalculator();
+> 		int[] p = new int[]{1,2,3,1,9,1};
+> 		System.out.println(pc.maxProfit(p));
+  	}
+  }

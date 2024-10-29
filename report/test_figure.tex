@@ -1,0 +1,22 @@
+\documentclass[sigconf]{acmart}
+\pagenumbering{gobble}
+
+\begin{document}
+
+\begin{verbatim}
+maxProfit :: [Int] -> Int
+maxProfit prices = maxProfitHelper prices (maxBound :: Int) 0
+  where
+    maxProfitHelper [] _ maxProfit = maxProfit
+    maxProfitHelper (p:ps) minPrice maxProfit =
+      let newMinPrice = min minPrice p
+          profit = p - newMinPrice
+          newMaxProfit = max maxProfit profit
+      in maxProfitHelper ps newMinPrice newMaxProfit
+main = do
+    let prices = [7, 1, 5, 3, 6, 4]
+    let result = maxProfit prices
+    putStrLn $ "Maximum profit: " ++ show result
+\end{verbatim}
+
+\end{document}
